@@ -1,0 +1,92 @@
+package AbsFactoryExample;
+
+interface Flat {
+    long getFlatPrice();
+}
+interface Cottage {
+    long getCottagePrice();
+}
+interface DetHouse {
+    long getDetHousePrice();
+}
+interface AbsFactory {
+    Flat getFlat();
+    Cottage getCottage();
+    DetHouse getDetHouse();
+}
+
+class UrbanFlatImpl implements Flat {
+    public long getFlatPrice() {
+        return 65000;
+    }
+}
+
+class UrbanCottageImpl implements Cottage {
+    public long getCottagePrice() {
+        return 30000;
+    }
+}
+
+class UrbanDetHouseImpl implements DetHouse {
+    public long getDetHousePrice() {
+        return 88000;
+    }
+}
+
+class UrbanHousePriceAbsFactory implements AbsFactory {
+    public Flat getFlat() {
+        return new UrbanFlatImpl();
+    }
+    public Cottage getCottage() {
+        return new UrbanCottageImpl();
+    }
+    public DetHouse getDetHouse() {
+        return new UrbanDetHouseImpl();
+    }
+}
+
+class RuralFlatImpl implements Flat {
+    public long getFlatPrice() {
+        return 44000;
+    }
+}
+class RuralCottageImpl implements Cottage {
+    public long getCottagePrice() {
+        return 16000;
+    }
+}
+class RuralDetHouseImpl implements DetHouse {
+    public long getDetHousePrice() {
+        return 67000;
+    }
+}
+class RuralHousePriceAbsFactory implements AbsFactory {
+    public Flat getFlat() {
+        return new RuralFlatImpl();
+    }
+    public Cottage getCottage() {
+        return new RuralCottageImpl();
+    }
+    public DetHouse getDetHouse() {
+        return new RuralDetHouseImpl();
+    }
+}
+
+public class MainClass {
+
+	    public static void main(String[] args) {
+	        AbsFactory ifactory = null;	    
+	        
+	        String type = "Urban";
+	        if(type.equals("Urban")) 	ifactory = new UrbanHousePriceAbsFactory(); 
+	        
+	        Flat flatEx1 = ifactory.getFlat();
+	        System.out.println(type + " flat price is " + flatEx1.getFlatPrice());
+	        
+	        type = "Rural";    
+	        if(type.equals("Rural"))	ifactory = new RuralHousePriceAbsFactory();
+
+	        Flat flatEx2 = ifactory.getFlat();
+	        System.out.println(type + " flat price is " + flatEx2.getFlatPrice());
+	    }
+	}
